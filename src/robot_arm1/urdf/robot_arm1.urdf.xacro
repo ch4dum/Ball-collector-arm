@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="RobotArm">
+
+  <xacro:include filename="gazebo.xacro"/>
+
+  <!-- Properties for mesh paths -->
+  <xacro:property name="base_link_mesh" value="package://robot_arm1/meshes/base_link.stl" />
+  <xacro:property name="translation_link1_mesh" value="package://robot_arm1/meshes/translation_link1.stl" />
+  <xacro:property name="translation_link2_mesh" value="package://robot_arm1/meshes/translation_link2.stl" />
+  <xacro:property name="translation_link3_mesh" value="package://robot_arm1/meshes/translation_link3.stl" />
+  <xacro:property name="rotation_link1_mesh" value="package://robot_arm1/meshes/rotation_link1.stl" />
+  <xacro:property name="gripper_base_link_mesh" value="package://robot_arm1/meshes/gripper_base_link.stl" />
+  <xacro:property name="left_gear_mesh" value="package://robot_arm1/meshes/left_gear.stl" />
+  <xacro:property name="right_gear_mesh" value="package://robot_arm1/meshes/right_gear.stl" />
+  <xacro:property name="left_finger_link_mesh" value="package://robot_arm1/meshes/left_finger_link.stl" />
+  <xacro:property name="right_finger_link_mesh" value="package://robot_arm1/meshes/right_finger_link.stl" />
+  <xacro:property name="left_link_mesh" value="package://robot_arm1/meshes/left_link.stl" />
+  <xacro:property name="right_link_mesh" value="package://robot_arm1/meshes/right_link.stl" />
+
+  <!-- Base Link -->
+  <gazebo>
+    <plugin name="fixed_base_plugin" filename="libgazebo_ros_fixed_joint.so">
+      <robotNamespace>/</robotNamespace>
+      <jointName>fixed_base_to_world</jointName>
+    </plugin>
+  </gazebo>
+  <link name="world"></link>
+  <joint name="base_joint" type="fixed">
+        <origin xyz="1.5 1.0 0" rpy="0 0 0"/>
+        <parent link="world"/>
+        <child link="base_link"/>        
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0046977 -0.05986 0.10925" rpy="0 0 0" />
+      <mass value="61.847" />
+      <inertia ixx="8.9315" ixy="7.4658E-10" ixz="6.817E-05" iyy="41.127" iyz="-0.00899" izz="49.614" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${base_link_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${base_link_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Translation Link 1 -->
+  <link name="translation_link1">
+    <inertial>
+      <origin xyz="-0.250000000002095 0.435152842679127 0.0389826713395632" rpy="0 0 0" />
+      <mass value="51.36" />
+      <inertia ixx="12.0167543947624" ixy="1.54043057140096E-15" ixz="-1.76497301229205E-17"
+               iyy="1.06232853207749" iyz="-0.875729236029984" izz="12.1835727376849" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${translation_link1_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${translation_link1_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint1" type="prismatic">
+    <origin xyz="0.889999999999991 0.035 0.0199999999999998" rpy="1.5707963267949 0 3.14159265358979" />
+    <parent link="base_link" />
+    <child link="translation_link1" />
+    <axis xyz="1 0 0" />
+    <limit lower="0" upper="2.3" effort="50" velocity="1.0" />
+  </joint>
+
+  <!-- Translation Link 2 -->
+  <link name="translation_link2">
+    <inertial>
+      <origin xyz="0.00365170430337325 0.028361086603273 0.011330730956939" rpy="0 0 0" />
+      <mass value="10.8848776465489" />
+      <inertia ixx="0.141809739002482" ixy="-1.5159036281914E-06" ixz="0.000194749834911085"
+               iyy="0.41672149524343" iyz="-1.51787271025204E-06" izz="0.280050111368379" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${translation_link2_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${translation_link2_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint2" type="prismatic">
+    <origin xyz="-0.25 0.23 -0.00500000000000009" rpy="3.14159265358979 0 3.14159265358979" />
+    <parent link="translation_link1" />
+    <child link="translation_link2" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="1.2" effort="50" velocity="1.0" />
+  </joint>
+
+  <link name="depth_camera">
+      <inertial>
+        <origin xyz="0.055 0.285 0.0" rpy="0 0 0" />
+        <mass value="0.1" />
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+      </inertial>
+      <visual>
+        <origin xyz="0.055 0.285 0.0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.05" />
+        </geometry>
+        <material name="">
+          <color rgba="0.5 0.5 0.5 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0.055 0.285 0.0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.05" />
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="camera">
+          <sensor name="depth_cam" type="depth">
+              <pose>0 0 0 0 0 0</pose>
+              <update_rate>10</update_rate>
+              <visualize>true</visualize>
+              <camera name="cam">
+                  <horizontal_fov>1.089</horizontal_fov>
+                  <image>
+                      <width>640</width>
+                      <height>480</height>
+                      <format>B8G8R8</format>
+                  </image>
+                  <clip>
+                      <near>0.02</near>
+                      <far>8.0</far>
+                  </clip>
+              </camera>
+              <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                  <frame_name>camera_link_optical</frame_name>
+                  <min_depth>0.1</min_depth>
+                  <max_depth>500</max_depth>
+              </plugin>
+          </sensor>
+    </gazebo>
+
+    <joint name="depth_camera_joint" type="fixed">
+      <origin xyz="0.1 0 0.1" rpy="0 0 0" />
+      <parent link="translation_link2" />
+      <child link="depth_camera" /> 
+    </joint>
+    <link name="camera"></link>
+
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0.055 0.285 0.0" rpy="1.57 -1.57 -3.14" />
+      <parent link="depth_camera" />
+      <child link="camera" /> 
+    </joint>
+
+
+
+  <!-- Rotation Link 1 -->
+  <link name="rotation_link1">
+    <inertial>
+      <origin xyz="-2.27196039759292E-12 0.114542743395101 0.0504745696873996" rpy="0 0 0" />
+      <mass value="2.13196468369155" />
+      <inertia ixx="0.0248361801077484" ixy="6.98017749714391E-15" ixz="7.56949210451417E-14"
+               iyy="0.0228180174551229" iyz="-0.00166335538325569" izz="0.00679968917690719" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${rotation_link1_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${rotation_link1_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint3" type="revolute">
+    <origin xyz="0.154999999999999 0.0803000000000034 0.0800000000000268" rpy="3.14159265358979 0 3.14159265358979" />
+    <parent link="translation_link2" />
+    <child link="rotation_link1" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.57" upper="0" effort="20" velocity="1.0" />
+  </joint>
+
+  <!-- Translation Link 3 -->
+  <link name="translation_link3">
+    <inertial>
+      <origin xyz="2.38964403820319E-12 -0.07957750294201 -2.69784194983913E-14" rpy="0 0 0" />
+      <mass value="0.927003079475929" />
+      <inertia ixx="0.0108217929012401" ixy="4.37889258737742E-14" ixz="1.36080904286771E-20"
+               iyy="0.000385354409498856" iyz="6.56927123127979E-19" izz="0.0108218096295927" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${translation_link3_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${translation_link3_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint4" type="prismatic">
+    <origin xyz="0 0.13 0" rpy="-1.5707963267949 0 3.14159265358979" />
+    <parent link="rotation_link1" />
+    <child link="translation_link3" />
+    <axis xyz="0 1 0" />
+    <limit lower="0" upper="0.3" effort="10" velocity="1.0" />
+  </joint>
+
+  <!-- Gripper Base -->
+  <link name="gripper_base_link">
+    <inertial>
+      <origin xyz="0.0295524067479955 -0.0037910601009466 -0.0304288616658541" rpy="0 0 0" />
+      <mass value="0.0340642510871864" />
+      <inertia ixx="7.44759001299176E-06" ixy="-3.88929201227732E-09" ixz="7.34895359326851E-08"
+               iyy="1.54171779302801E-05" iyz="4.32531885043575E-08" izz="9.63974169836892E-06" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${gripper_base_link_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0 0.501960784313725 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${gripper_base_link_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gripper_base_joint" type="fixed">
+    <origin xyz="-0.0300000000000025 0.153999999999969 -0.003000000000006" rpy="-1.5707963267949 0 0" />
+    <parent link="translation_link3" />
+    <child link="gripper_base_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <!-- Left Gear -->
+  <link name="left_gear">
+    <inertial>
+      <origin xyz="-0.00604053940923188 0.0030000572721936 0.00267489602067839" rpy="0 0 0" />
+      <mass value="0.00478292112637988" />
+      <inertia ixx="3.86322522980389E-07" ixy="-3.18207618618979E-12" ixz="2.98536603200362E-07"
+               iyy="1.12805247731218E-06" iyz="-4.69629887702561E-13" izz="7.69705895935765E-07" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${left_gear_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${left_gear_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_gear_joint" type="revolute">
+    <origin xyz="0.044 0 -0.025" rpy="0 1.0941 3.1416" />
+    <parent link="gripper_base_link" />
+    <child link="left_gear" />
+    <axis xyz="0 1 0" />
+    <limit effort="10" velocity="1.0" lower="-1" upper="-0.4"  />
+  </joint>
+
+  <!-- Left Finger -->
+  <link name="left_finger_link">
+    <inertial>
+      <origin xyz="0.0383338514633984 -0.00899760877678835 0.00598353313936295" rpy="0 0 0" />
+      <mass value="0.0102853723125443" />
+      <inertia ixx="5.52803764026101E-07" ixy="4.24807424655345E-10" ixz="6.01986263597194E-07"
+               iyy="3.92683569868684E-06" iyz="-7.48642887391917E-11" izz="3.99675637729028E-06" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${left_finger_link_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0 0.501960784313725 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${left_finger_link_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_finger_joint" type="revolute">
+    <origin xyz="-0.0206720657478174 0.0117499999999802 0.0252961131565383" rpy="3.14159265358979 -0.476739430387102 3.14159265358979" />
+    <parent link="left_gear" />
+    <child link="left_finger_link" />
+    <axis xyz="0 1 0" /> 
+    <limit effort="10" velocity="1.0" lower="-0.5" upper="0.5"/>
+  </joint>
+
+  <!-- Right Gear -->
+  <link name="right_gear">
+    <inertial>
+      <origin xyz="-0.00631081577713055 0.00299998692356207 -0.00140530218447399" rpy="0 0 0" />
+      <mass value="0.00490514141795804" />
+      <inertia ixx="2.90483764298618E-07" ixy="9.09477065254127E-13" ixz="-2.07021828454644E-07"
+               iyy="1.13499134558351E-06" iyz="1.23874046287587E-13" izz="8.7320263649232E-07" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${right_gear_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0.694117647058824 0.0980392156862745 0.0980392156862745 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${right_gear_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_gear_joint" type="revolute">
+    <origin xyz="0.0160000000000085 0 -0.0249999999999957" rpy="3.14159265358979 1.16006983095885 0" />
+    <parent link="gripper_base_link" />
+    <child link="right_gear" />
+    <axis xyz="0 1 0" /> <!-- แกนหมุน -->
+    <limit effort="10" velocity="1.0" lower="0.4" upper="1"/>
+  </joint>
+
+  <!-- Right Finger -->
+  <link name="right_finger_link">
+    <inertial>
+      <origin xyz="0.0383338515532324 0.00899765551863368 -0.00598346228096713" rpy="0 0 0" />
+      <mass value="0.0102853723125444" />
+      <inertia ixx="5.52803781963615E-07" ixy="-4.20104831267057E-10" ixz="-6.01986318207423E-07"
+               iyy="3.9268356998608E-06" iyz="-7.54105008767029E-11" izz="3.9967563581789E-06" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="${right_finger_link_mesh}" />
+      </geometry>
+      <material name="">
+        <color rgba="0 0.501960784313725 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="${right_finger_link_mesh}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_finger_joint" type="revolute">
+    <origin xyz="-0.0240420155401674 -0.00625000000002063 -0.0190390937929699" rpy="3.14158484179656 0.410726480934875 -3.14159265358967" />
+    <parent link="right_gear" />
+    <child link="right_finger_link" />
+    <axis xyz="0 1 0" /> <!-- แกนหมุน -->
+    <limit effort="10" velocity="1.0" lower="-0.5" upper="0.5" />
+  </joint>
+
+</robot>

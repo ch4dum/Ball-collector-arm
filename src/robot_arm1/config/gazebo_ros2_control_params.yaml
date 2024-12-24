@@ -1,0 +1,13 @@
+ros2_control:
+  # Use the fake hardware plugin to simulate joint states and commands
+  hardware:
+    plugin: "fake_components/GenericSystem"
+  # List all joints to be controlled by gazebo_ros2_control
+  joints:
+    - joint1
+    - joint2
+    - joint3
+    - joint4
+    - left_gear_joint
+    - left_finger_joint
+    

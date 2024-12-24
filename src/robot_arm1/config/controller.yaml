@@ -1,0 +1,84 @@
+  controller_manager:
+    ros__parameters:
+      update_rate: 100  # Hz
+
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+
+      velocity_controllers:
+        type: velocity_controllers/JointGroupVelocityController
+
+      effort_controllers:
+        type: effort_controllers/JointGroupEffortController
+
+  velocity_controllers:
+    ros__parameters:
+      joints: 
+          - joint1
+          - joint2
+          - joint3
+          - joint4
+          - left_gear_joint
+          - left_finger_joint
+          - right_gear_joint
+          - right_finger_joint
+      command_interface: 
+        - velocity
+      state_interface: 
+        - velocity
+        - effort
+
+
+  forward_position_controller:
+    ros__parameters:
+      joints:
+        - joint1
+        - joint2
+        - joint3
+        - joint4
+        - left_gear_joint
+        - left_finger_joint
+        - right_gear_joint
+        - right_finger_joint
+      interface_name: position
+
+
+  joint_trajectory_position_controller:
+    ros__parameters:
+      joints:
+        - joint1
+        - joint2
+        - joint3
+        - joint4
+        - left_gear_joint
+        - left_finger_joint
+        - right_gear_joint
+        - right_finger_joint
+
+
+      command_interfaces:
+        - position
+
+      state_interfaces:
+        - position
+        - velocity
+
+      state_publish_rate: 50.0 # Defaults to 50
+      action_monitor_rate: 20.0 # Defaults to 20
+
+      allow_partial_joints_goal: false # Defaults to false
+      open_loop_control: true
+      allow_integration_in_goal_trajectories: true
+      constraints:
+        stopped_velocity_tolerance: 0.01 # Defaults to 0.01
+        goal_time: 0.0 # Defaults to 0.0 (start immediately)
+
+  effort_controllers:
+    ros__parameters:
+      joints:
+        - left_gear_joint
+        - left_finger_joint
+        - right_gear_joint
+        - right_finger_joint
+      command_interface: effort
+      state_interface: effort
