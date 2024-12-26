@@ -115,6 +115,8 @@ Expected Behavior:
 - 
 #### Video demonstrating the operation of TeleOp Mode.
 
+https://github.com/user-attachments/assets/316a980c-9191-442a-a3b1-c83416fb06ce
+
 #### Returning to Home Position
 
 Command:
@@ -126,6 +128,7 @@ Expected Behavior:
 
 #### Video demonstrating the operation of SetHome Mode.
 
+https://github.com/user-attachments/assets/6bbc8ef8-dd74-4efd-8a3f-df49a8dc738c
 
 #### Auto Mode for Ball Collection
 
