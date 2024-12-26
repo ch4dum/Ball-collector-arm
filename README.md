@@ -63,7 +63,11 @@ This project presents the design and simulation of an intelligent robotic arm ca
 
 ### Changing Modes and Using the Script
 
-Upon running the script, the following modes and controls are available:
+Upon running the script,
+```bash
+ros2 run robot_arm1 jointstate_script.py
+```
+the following modes and controls are available:
 
 ```text
 ===========================
@@ -90,6 +94,9 @@ Where N is:
     8: Auto mode
 ===========================
 ```
+when The image shows the names of the joints at each position that needs to be controlled.
+![image](https://github.com/user-attachments/assets/380f4391-1d2c-478e-b9a5-497b598910ea) ![image](https://github.com/user-attachments/assets/6f32ffd0-ff3f-4ea1-8568-4983807b5ade)
+
 
 ### Example Run Outputs
 
@@ -98,6 +105,10 @@ Where N is:
 Command:
 ```bash
 ros2 topic pub /change_mode std_msgs/Int16 "data: 1"
+```
+manual control joint by :
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 Expected Behavior:
 - Joint1 starts moving under manual control.
