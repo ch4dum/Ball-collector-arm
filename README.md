@@ -112,6 +112,8 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 Expected Behavior:
 - Joint1 starts moving under manual control.
 - Joint state values are updated and published.
+- 
+#### Video demonstrating the operation of TeleOp Mode.
 
 #### Returning to Home Position
 
@@ -121,6 +123,9 @@ ros2 topic pub --once /change_mode std_msgs/Int16 "data: 7"
 ```
 Expected Behavior:
 - The robot smoothly moves back to its initial position.
+
+#### Video demonstrating the operation of SetHome Mode.
+
 
 #### Auto Mode for Ball Collection
 
