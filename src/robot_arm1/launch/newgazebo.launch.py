@@ -38,7 +38,7 @@ def generate_launch_description():
         launch_arguments={"use_sim_time": "true"}.items()
     )
 
-    # Spawn Entity in Gazebo
+    # Spawn Entity in Gazebo (ตัวหุ่น)
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
@@ -65,6 +65,7 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Effort Controller Spawner
     effort_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -88,12 +89,102 @@ def generate_launch_description():
         )
     )
 
-    # Launch the components
+    # -----------------------
+    #  Spawn Balls Section
+    # -----------------------
+    spawn_blue_ball = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "blue_ball.sdf"),
+            "-entity", "blue_ball"
+        ],
+        output="screen",
+    )
+
+    spawn_green_ball = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "green_ball.sdf"),
+            "-entity", "green_ball"
+        ],
+        output="screen",
+    )
+
+    spawn_pink_ball = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "pink_ball.sdf"),
+            "-entity", "pink_ball"
+        ],
+        output="screen",
+    )
+
+    spawn_red_ball_0 = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "red_ball_0.sdf"),
+            "-entity", "red_ball_0"
+        ],
+        output="screen",
+    )
+
+    spawn_red_ball_1 = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "red_ball_1.sdf"),
+            "-entity", "red_ball_1"
+        ],
+        output="screen",
+    )
+
+    spawn_yellow_ball = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-file", os.path.join(pkg, "worlds", "yellow_ball.sdf"),
+            "-entity", "yellow_ball"
+        ],
+        output="screen",
+    )
+
+    # Event: Spawn ลูกบอลทั้งหมดหลังจากตัวหุ่น spawn เสร็จ
+    spawn_balls_event = RegisterEventHandler(
+        OnProcessExit(
+            target_action=spawn_entity,
+            on_exit=[
+                spawn_blue_ball,
+                spawn_green_ball,
+                spawn_pink_ball,
+                spawn_red_ball_0,
+                spawn_red_ball_1,
+                spawn_yellow_ball
+            ]
+        )
+    )
+
+    # Add Image Saver and 3D Detector Script
+    image_saver_and_3d_detector = Node(
+        package="robot_arm1",
+        executable="image_saver_and_3d_detector.py",
+        output="screen",
+        name="image_saver_and_3d_detector",
+        parameters=[]  # Add any ROS 2 parameters if needed
+    )
+
+    # Final LaunchDescription
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
         spawn_entity,
         joint_state_broadcaster_spawner,
         velocity_controller_event,
-        effort_controller_event
+        effort_controller_event,
+        # ตัวนี้คือ Event Handler ที่จะ spawn ลูกบอลเมื่อตัวหุ่น spawn เสร็จ
+        spawn_balls_event,
+        image_saver_and_3d_detector
     ])

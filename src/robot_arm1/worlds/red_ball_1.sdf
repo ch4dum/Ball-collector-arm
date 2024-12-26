@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='red_ball_1'>
+    <pose>1.373340 0.669094 0.84 0.00 0.00 0.00</pose>
+    <link name='link'>
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.1</iyy>
+          <iyz>0</iyz>
+          <izz>0.1</izz>
+        </inertia>
+        <pose>0 0 0 0 -0 0</pose>
+      </inertial>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <kinematic>0</kinematic>
+      <pose>0 0 0 0 -0 0</pose>
+      <gravity>1</gravity>
+      <visual name='visual'>
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'>
+            <normal_map>__default__</normal_map>
+          </shader>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0 1</specular>
+          <emissive>1 0 0 1</emissive>
+        </material>
+        <pose>0 0 0 0 -0 0</pose>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='collision'>
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0.8</restitution_coefficient>
+            <threshold>0.01</threshold>
+          </bounce>
+          <contact>
+            <ode>
+              <soft_cfm>0.0001</soft_cfm>
+              <soft_erp>0.5</soft_erp>
+              <kp>50000</kp>
+              <kd>50</kd>
+              <max_vel>100.0</max_vel>
+              <min_depth>0.01</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

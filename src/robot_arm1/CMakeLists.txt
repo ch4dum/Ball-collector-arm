@@ -51,6 +51,7 @@ install(PROGRAMS
   scripts/ws.py
   scripts/controller.py
   scripts/jointstate_script.py
+  scripts/image_saver_and_3d_detector.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -76,6 +77,7 @@ install(DIRECTORY
   meshes
   urdf
   scripts
+  worlds
   DESTINATION share/${PROJECT_NAME})
 
 ament_package()
