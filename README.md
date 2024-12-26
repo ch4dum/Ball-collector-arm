@@ -12,7 +12,7 @@ This project presents the design and simulation of an intelligent robotic arm ca
 ## System Overview
 
 ### System Diagram
-
+![image](https://github.com/user-attachments/assets/41fc89d2-5713-41bb-9bdc-638da1ead339)
 1. **Start by Randomizing Balls:** Randomly assigns colors and positions to the balls.
 2. **Receive User Commands:** Accepts user inputs for ball color and number.
 3. **Scan Mode:** Scans all balls to identify their colors and locations.
