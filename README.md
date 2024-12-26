@@ -87,7 +87,7 @@ Where N is:
     7: Set home mode
 
     ---------- Taking Picture Mode ----------
-    8: Taking picture (Auto mode)
+    8: Auto mode
 ===========================
 ```
 
