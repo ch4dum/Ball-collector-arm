@@ -26,9 +26,8 @@ This project presents the design and simulation of an intelligent robotic arm ca
 ### Modes of Operation
 
 1. **TeleOp Mode:** Allows manual control of the robotic arm.
-2. **Scan Mode:** Identifies and records the positions and colors of all balls.
-3. **SetHome Mode:** Returns the robotic arm to its home position.
-4. **Auto Mode:** Automatically performs the ball collection and placement tasks based on the user’s commands.
+2. **SetHome Mode:** Returns the robotic arm to its home position.
+3. **Scan AND Auto Mode:** Identifies and records the positions and colors of all balls and Automatically performs the ball collection and placement tasks based on the user’s commands.
 
 ### Simulation Environment
 
