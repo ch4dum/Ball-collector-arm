@@ -134,6 +134,8 @@ Expected Behavior:
 - Ball positions and colors are identified and logged.
 - The robot autonomously picks up balls and places them in the designated basket.
 - Camera alignment and precise movements are observed.
+#### Video demonstrating the operation of AUTO mode: After scanning is complete, input specifies the need to pick up one green ball (video speed increased by 4x).
+https://github.com/user-attachments/assets/f4197894-07d5-4286-ab7e-7f707c43f239
 
 ## Future Work
 
