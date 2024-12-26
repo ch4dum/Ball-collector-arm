@@ -145,6 +145,7 @@ https://github.com/user-attachments/assets/c56bca86-b771-428a-861f-9413307bbe43
 - **Enhancements:**
   - Add real-time depth sensing for ball detection.
   - Optimize PID parameters for smoother operations.
+  - Add Real-Time Depth Sensing for Ball Detection.
 - **Testing:**
   - Perform stress tests with more balls and complex arrangements.
   - Integrate a failure recovery system for missed balls.
