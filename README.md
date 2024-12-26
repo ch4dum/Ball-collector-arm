@@ -57,7 +57,7 @@ This project presents the design and simulation of an intelligent robotic arm ca
     <package_name> robot_arm1
     <launch_file> newgazebo
 
-6. Control the robot using:
+6. Control the robot using(can skip this process):
    - **TeleOp:** `ros2 topic pub /cmd_vel geometry_msgs/Twist ...`
    - **Mode Change:** `ros2 topic pub /change_mode std_msgs/Int16 "data: <mode_number>"`
 
