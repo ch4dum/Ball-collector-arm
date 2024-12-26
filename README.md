@@ -80,12 +80,12 @@ Where N is:
 
     ---------- TeleOp Mode ----------
     1-6: Joint control
-       joint1
-       joint2
-       joint3
-       joint4
-       left_gear_joint and right_gear_joint
-       left_finger_joint and right_finger_joint
+      1. joint1
+      2. joint2
+      3. joint3
+      4. joint4
+      5. left_gear_joint and right_gear_joint
+      6. left_finger_joint and right_finger_joint
 
     ---------- Set Home Mode ----------
     7: Set home mode
