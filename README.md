@@ -74,7 +74,7 @@ the following modes and controls are available:
 🎉 JointStateNode has started! 🎉
 ===========================
 Use the following command to change mode:
-ros2 topic pub /change_mode std_msgs/Int16 "data: N"
+ros2 topic pub --once /change_mode std_msgs/Int16 "data: N"
 
 Where N is:
 
@@ -104,7 +104,7 @@ when The image shows the names of the joints at each position that needs to be c
 
 Command:
 ```bash
-ros2 topic pub /change_mode std_msgs/Int16 "data: 1"
+ros2 topic pub --once /change_mode std_msgs/Int16 "data: 1"
 ```
 manual control joint by :
 ```bash
@@ -118,7 +118,7 @@ Expected Behavior:
 
 Command:
 ```bash
-ros2 topic pub /change_mode std_msgs/Int16 "data: 7"
+ros2 topic pub --once /change_mode std_msgs/Int16 "data: 7"
 ```
 Expected Behavior:
 - The robot smoothly moves back to its initial position.
@@ -127,7 +127,7 @@ Expected Behavior:
 
 Command:
 ```bash
-ros2 topic pub /change_mode std_msgs/Int16 "data: 8"
+ros2 topic pub --once /change_mode std_msgs/Int16 "data: 8"
 ```
 Expected Behavior:
 - The robot scans the environment.
