@@ -151,4 +151,5 @@ https://github.com/user-attachments/assets/f4197894-07d5-4286-ab7e-7f707c43f239
 - [ROS 2 Documentation](https://docs.ros.org/en/)
 - [Gazebo Documentation](http://gazebosim.org/)
 - **Project Presentation:** See `Project Presentation` for additional details and system diagrams.
-- [Project Presentation](http://gazebosim.org/)
+- [Project Presentation.pdf](https://github.com/user-attachments/files/18250537/Final.Presentation_ROS.pdf)
+
