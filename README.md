@@ -149,6 +149,7 @@ https://github.com/user-attachments/assets/c56bca86-b771-428a-861f-9413307bbe43
 - **Testing:**
   - Perform stress tests with more balls and complex arrangements.
   - Integrate a failure recovery system for missed balls.
+  - Test the Robot's Ability to Handle Depth.
 
 ## References
 
