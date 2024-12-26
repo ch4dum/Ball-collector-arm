@@ -128,7 +128,7 @@ Expected Behavior:
 
 #### Video demonstrating the operation of SetHome Mode.
 
-https://github.com/user-attachments/assets/6bbc8ef8-dd74-4efd-8a3f-df49a8dc738c
+https://github.com/user-attachments/assets/90aff70c-4383-4b27-ad6b-59a1b599ca03
 
 #### Auto Mode for Ball Collection
 
